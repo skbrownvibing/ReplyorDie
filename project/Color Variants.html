@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reply or Die — color variants</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+    background: #111;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+  }
+  .page-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px; }
+  .page-head h1 { font-family: 'Instrument Serif', serif; font-size: 32px; font-weight: 400; letter-spacing: -0.01em; }
+  .page-head .tag { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .card {
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+  .card-label {
+    position: absolute;
+    top: 16px; left: 16px;
+    z-index: 10;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(8px);
+    color: rgba(255,255,255,0.9);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  /* ==================================================
+     VARIANT A — WARM NEWSPRINT
+     ================================================== */
+  .va {
+    --paper: #f6f1e7;
+    --paper-2: #efe8d8;
+    --ink: #1a1814;
+    --ink-2: #3a362e;
+    --ink-3: #6b6558;
+    --rule: rgba(26,24,20,0.14);
+    --rule-2: rgba(26,24,20,0.08);
+    --hot: #c8372d;        /* printer's red */
+    --navy: #1e3a5f;       /* deep inky navy */
+    --gold: #b08322;       /* a little warmth for mid-states */
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 720px;
+    display: flex;
+    flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 3px, rgba(26,24,20,0.012) 3px 4px),
+      repeating-linear-gradient(90deg, transparent 0 3px, rgba(26,24,20,0.012) 3px 4px);
+  }
+  .va .nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 28px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .va .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Instrument Serif', serif;
+    font-size: 26px;
+    letter-spacing: -0.01em;
+  }
+  .va .brand-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--hot); }
+  .va .brand em { font-style: italic; }
+  .va .nav-links { display: flex; gap: 24px; font-size: 13px; color: var(--ink-2); }
+  .va .nav-links a { color: inherit; text-decoration: none; }
+  .va .nav-cta {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .va .masthead {
+    padding: 12px 28px;
+    border-bottom: 1px solid var(--rule);
+    display: flex; justify-content: space-between;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .va .hero {
+    padding: 40px 28px 32px;
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 40px;
+    align-items: start;
+    border-bottom: 1px solid var(--rule);
+  }
+  .va .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--hot);
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .va .eyebrow::before {
+    content: '';
+    width: 32px; height: 1px; background: var(--hot);
+  }
+  .va .h1 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(56px, 7vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .va .h1 .or { color: var(--ink-3); font-style: italic; }
+  .va .h1 .die { color: var(--hot); font-style: italic; }
+  .va .dek {
+    margin-top: 24px;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 480px;
+  }
+  .va .cta-row { margin-top: 28px; display: flex; gap: 10px; }
+  .va .cta {
+    padding: 13px 22px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid var(--ink);
+    cursor: pointer;
+  }
+  .va .cta.primary { background: var(--ink); color: var(--paper); }
+  .va .cta.ghost { background: transparent; color: var(--ink); }
+
+  /* score card right */
+  .va .scorecard {
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 22px;
+    position: relative;
+  }
+  .va .sc-head {
+    display: flex; justify-content: space-between;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-3);
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .va .sc-ring-wrap {
+    display: flex; align-items: center; gap: 20px;
+  }
+  .va .sc-ring { position: relative; width: 160px; height: 160px; flex-shrink: 0; }
+  .va .sc-ring svg { transform: rotate(-90deg); }
+  .va .sc-ring .sc-val {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .va .sc-ring .sc-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 72px; line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .va .sc-ring .sc-cap { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-3); margin-top: 4px; }
+  .va .sc-copy .verdict {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .va .sc-copy .verdict .em { color: var(--hot); }
+  .va .sc-copy .sub { margin-top: 6px; font-size: 12px; color: var(--ink-3); }
+
+  .va .ledger {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--rule);
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;
+  }
+  .va .ld-cell { text-align: center; }
+  .va .ld-val {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px; line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .va .ld-val.hot { color: var(--hot); }
+  .va .ld-val.navy { color: var(--navy); }
+  .va .ld-lab {
+    margin-top: 6px;
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3);
+  }
+
+  /* waiting list below */
+  .va .waiting {
+    padding: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .va .wait-head {
+    grid-column: 1 / -1;
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 10px;
+  }
+  .va .wait-head h3 {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 28px;
+    font-weight: 400;
+  }
+  .va .wait-head .count { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); }
+  .va .wait-card {
+    padding: 14px 0;
+    border-top: 1px solid var(--rule-2);
+  }
+  .va .wait-name {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 15px; font-weight: 500;
+  }
+  .va .urg-dot { width: 7px; height: 7px; border-radius: 50%; }
+  .va .urg-dot.hot { background: var(--hot); }
+  .va .urg-dot.warm { background: var(--gold); }
+  .va .urg-dot.cool { background: var(--ink-3); }
+  .va .wait-snip {
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .va .wait-meta {
+    margin-top: 8px;
+    display: flex; justify-content: space-between;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);
+  }
+  .va .wait-meta .hot-txt { color: var(--hot); }
+
+  .va .foot {
+    padding: 20px 28px;
+    display: flex; justify-content: space-between;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-3);
+  }
+
+  /* ==================================================
+     VARIANT B — iMESSAGE NATIVE
+     ================================================== */
+  .vb {
+    --bg: #ffffff;
+    --bg-2: #f5f5f7;
+    --bg-3: #eceef2;
+    --ink: #1d1d1f;
+    --ink-2: #424245;
+    --ink-3: #86868b;
+    --rule: rgba(0,0,0,0.08);
+    --blue: #0b84ff;         /* iMessage blue */
+    --blue-2: #147cff;
+    --red: #ff3b30;          /* iOS red */
+    --green: #34c759;
+    --orange: #ff9500;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 720px;
+    display: flex;
+    flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  }
+  .vb .nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--rule);
+    backdrop-filter: blur(20px);
+  }
+  .vb .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 16px; letter-spacing: -0.01em;
+  }
+  .vb .brand-dot {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--blue);
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 11px;
+    box-shadow: 0 2px 4px rgba(11,132,255,0.3);
+  }
+  .vb .nav-links { display: flex; gap: 22px; font-size: 13px; color: var(--ink-2); }
+  .vb .nav-links a { color: inherit; text-decoration: none; }
+  .vb .nav-cta {
+    background: var(--blue);
+    color: white;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .vb .hero {
+    padding: 56px 28px 40px;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .vb .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(11,132,255,0.08);
+    color: var(--blue);
+    font-size: 12px; font-weight: 500;
+    margin-bottom: 22px;
+  }
+  .vb .eyebrow::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue);
+  }
+  .vb .h1 {
+    font-size: clamp(48px, 6vw, 76px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .vb .h1 .blue { color: var(--blue); }
+  .vb .dek {
+    margin-top: 22px;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 480px;
+    letter-spacing: -0.01em;
+  }
+  .vb .cta-row { margin-top: 28px; display: flex; gap: 10px; align-items: center; }
+  .vb .cta {
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+  }
+  .vb .cta.primary {
+    background: var(--blue);
+    color: white;
+    box-shadow: 0 2px 8px rgba(11,132,255,0.3);
+  }
+  .vb .cta.ghost {
+    background: transparent;
+    color: var(--blue);
+  }
+  .vb .cta-sub { font-size: 12px; color: var(--ink-3); margin-left: 6px; }
+
+  /* phone preview right */
+  .vb .phone {
+    width: 320px;
+    margin: 0 auto;
+    aspect-ratio: 9/18;
+    background: var(--bg-2);
+    border-radius: 44px;
+    border: 10px solid #1d1d1f;
+    padding: 14px 10px;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.12), 0 0 0 2px rgba(0,0,0,0.04);
+    overflow: hidden;
+  }
+  .vb .phone::before {
+    content: '';
+    position: absolute;
+    top: 8px; left: 50%; transform: translateX(-50%);
+    width: 90px; height: 22px; border-radius: 14px; background: #1d1d1f;
+    z-index: 2;
+  }
+  .vb .phone-head {
+    padding: 24px 8px 10px;
+    text-align: center;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .vb .phone-head .ph-name { font-size: 10px; color: var(--ink-3); }
+  .vb .phone-head .ph-title { font-weight: 600; font-size: 15px; margin-top: 2px; }
+  .vb .phone-head .ph-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-top: 4px;
+    font-size: 10px; color: var(--red);
+    font-weight: 500;
+  }
+  .vb .phone-head .ph-badge::before {
+    content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--red);
+  }
+  .vb .phone-msgs {
+    padding: 10px 6px;
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .vb .bub {
+    max-width: 82%;
+    padding: 7px 12px;
+    border-radius: 18px;
+    font-size: 13px;
+    line-height: 1.3;
+  }
+  .vb .bub.them {
+    background: #e9e9eb;
+    color: var(--ink);
+    border-bottom-left-radius: 5px;
+    align-self: flex-start;
+  }
+  .vb .bub.me {
+    background: var(--blue);
+    color: white;
+    border-bottom-right-radius: 5px;
+    align-self: flex-end;
+  }
+  .vb .phone-time { text-align: center; font-size: 9px; color: var(--ink-3); padding: 4px 0; }
+  .vb .phone-ai {
+    margin: 10px 6px 0;
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .vb .phone-ai-head {
+    padding: 8px 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(11,132,255,0.06);
+    border-bottom: 1px solid var(--rule);
+    font-size: 11px;
+  }
+  .vb .phone-ai-head .sp { color: var(--blue); font-weight: 500; display: flex; align-items: center; gap: 4px; }
+  .vb .phone-ai-head .regen { color: var(--ink-3); font-size: 10px; }
+  .vb .phone-ai-body {
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+
+  /* score strip under hero */
+  .vb .strip {
+    margin: 0 28px 28px;
+    padding: 22px;
+    border-radius: 18px;
+    background: var(--bg-2);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 28px;
+    align-items: center;
+  }
+  .vb .strip-score {
+    display: flex; align-items: center; gap: 16px;
+  }
+  .vb .strip-ring { position: relative; width: 96px; height: 96px; }
+  .vb .strip-ring svg { transform: rotate(-90deg); }
+  .vb .strip-ring .v {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .vb .strip-ring .v .n { font-size: 34px; font-weight: 600; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; line-height: 1; }
+  .vb .strip-ring .v .c { font-size: 9px; color: var(--ink-3); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 2px; }
+  .vb .strip-msg .t { font-size: 15px; font-weight: 500; }
+  .vb .strip-msg .t .em { color: var(--red); }
+  .vb .strip-msg .s { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+
+  .vb .strip-stats {
+    display: flex; gap: 24px;
+    padding-left: 28px;
+    border-left: 1px solid var(--rule);
+  }
+  .vb .st-cell { text-align: center; }
+  .vb .st-val { font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; line-height: 1; }
+  .vb .st-val.red { color: var(--red); }
+  .vb .st-val.orange { color: var(--orange); }
+  .vb .st-lab { margin-top: 4px; font-size: 10px; color: var(--ink-3); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .vb .foot {
+    padding: 18px 28px;
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--ink-3);
+    border-top: 1px solid var(--rule);
+  }
+
+  @media (max-width: 1100px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="page-head">
+      <h1>Reply or Die — color explorations</h1>
+      <span class="tag">A vs B · single-scroll samples</span>
+    </div>
+
+    <div class="grid">
+
+      <!-- =========================================
+           VARIANT A — WARM NEWSPRINT
+           ========================================= -->
+      <div class="card">
+        <span class="card-label">A · Warm Newsprint</span>
+        <section class="va">
+          <nav class="nav">
+            <div class="brand"><span class="brand-dot"></span><span>Reply or <em>Die</em></span></div>
+            <div class="nav-links">
+              <a>Inbox</a><a>Score</a><a>Pricing</a>
+            </div>
+            <a class="nav-cta">Download</a>
+          </nav>
+          <div class="masthead">
+            <span>Vol. 01 · No. 17</span>
+            <span>Thursday, April 17, 2026</span>
+            <span>Local-first · No cloud</span>
+          </div>
+
+          <div class="hero">
+            <div>
+              <div class="eyebrow">An honest text triage tool</div>
+              <h1 class="h1">
+                Reply<br>
+                <span class="or">or</span> <span class="die">die.</span>
+              </h1>
+              <p class="dek">
+                Surfaces the texts you owe, filters the noise, and drafts the reply when you're stuck. Your messages never leave the machine.
+              </p>
+              <div class="cta-row">
+                <button class="cta primary">Download for Mac</button>
+                <button class="cta ghost">See how it works →</button>
+              </div>
+            </div>
+
+            <div class="scorecard">
+              <div class="sc-head">
+                <span>Score · Last 7 days</span>
+                <span>— 6</span>
+              </div>
+              <div class="sc-ring-wrap">
+                <div class="sc-ring">
+                  <svg width="160" height="160" viewBox="0 0 160 160">
+                    <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(26,24,20,0.1)" stroke-width="10"/>
+                    <circle cx="80" cy="80" r="68" fill="none" stroke="#c8372d" stroke-width="10"
+                      stroke-dasharray="427" stroke-dashoffset="324" stroke-linecap="round"/>
+                  </svg>
+                  <div class="sc-val">
+                    <div class="sc-num">24</div>
+                    <div class="sc-cap">out of 100</div>
+                  </div>
+                </div>
+                <div class="sc-copy">
+                  <div class="verdict">You are, objectively, a <span class="em">bad texter</span>.</div>
+                  <div class="sub">Nine people are still waiting. The oldest: six days.</div>
+                </div>
+              </div>
+              <div class="ledger">
+                <div class="ld-cell">
+                  <div class="ld-val navy">38%</div>
+                  <div class="ld-lab">Reply rate</div>
+                </div>
+                <div class="ld-cell">
+                  <div class="ld-val">2.1d</div>
+                  <div class="ld-lab">Avg wait</div>
+                </div>
+                <div class="ld-cell">
+                  <div class="ld-val hot">9</div>
+                  <div class="ld-lab">Hanging</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="waiting">
+            <div class="wait-head">
+              <h3>Still waiting on a reply</h3>
+              <span class="count">9 people · oldest 6d</span>
+            </div>
+            <div class="wait-card">
+              <div class="wait-name"><span class="urg-dot hot"></span> Larry David</div>
+              <div class="wait-snip">"Don't act like you were looking at a bird. There was no bird."</div>
+              <div class="wait-meta"><span class="hot-txt">6 days waiting</span><span>+1 (212) 555-0101</span></div>
+            </div>
+            <div class="wait-card">
+              <div class="wait-name"><span class="urg-dot warm"></span> Fleabag</div>
+              <div class="wait-snip">"Are you free later or are you doing that thing where you avoid your phone to feel superior?"</div>
+              <div class="wait-meta"><span>7 hours waiting</span><span>+1 (212) 555-0108</span></div>
+            </div>
+            <div class="wait-card">
+              <div class="wait-name"><span class="urg-dot warm"></span> Cher Horowitz</div>
+              <div class="wait-snip">"Need yes/no. Is this outfit saying 'charity lunch' or 'minor European princess'?"</div>
+              <div class="wait-meta"><span>6 hours waiting</span><span>+1 (212) 555-0110</span></div>
+            </div>
+          </div>
+
+          <div class="foot">
+            <span>Reply or Die · Est. 2026</span>
+            <span>Mac · Local-first</span>
+            <span>Privacy-safe by design</span>
+          </div>
+        </section>
+      </div>
+
+      <!-- =========================================
+           VARIANT B — iMESSAGE NATIVE
+           ========================================= -->
+      <div class="card">
+        <span class="card-label">B · iMessage Native</span>
+        <section class="vb">
+          <nav class="nav">
+            <div class="brand">
+              <span class="brand-dot">✦</span>
+              <span>Reply or Die</span>
+            </div>
+            <div class="nav-links">
+              <a>How it works</a><a>Pricing</a><a>Privacy</a>
+            </div>
+            <a class="nav-cta">Download</a>
+          </nav>
+
+          <div class="hero">
+            <div>
+              <div class="eyebrow">Works natively with iMessage</div>
+              <h1 class="h1">
+                Reply.<br>
+                <span class="blue">Or die trying.</span>
+              </h1>
+              <p class="dek">
+                Surfaces the texts you owe, filters the noise, drafts the reply when you're stuck. Everything stays on your Mac.
+              </p>
+              <div class="cta-row">
+                <button class="cta primary">Download for Mac</button>
+                <button class="cta ghost">See how it works</button>
+                <span class="cta-sub">Free · macOS 14+</span>
+              </div>
+            </div>
+
+            <div class="phone">
+              <div class="phone-head">
+                <div class="ph-name">6d · +1 (212) 555-0101</div>
+                <div class="ph-title">Larry David</div>
+                <div class="ph-badge">WAITING 6D</div>
+              </div>
+              <div class="phone-msgs">
+                <div class="bub them">I saw you across the street and you did not acknowledge me.</div>
+                <div class="bub them">That is a very strange social choice.</div>
+                <div class="bub them">Don't act like you were looking at a bird. There was no bird.</div>
+                <div class="phone-time">6d ago</div>
+              </div>
+              <div class="phone-ai">
+                <div class="phone-ai-head">
+                  <span class="sp">✦ Suggested reply</span>
+                  <span class="regen">↻ Regenerate</span>
+                </div>
+                <div class="phone-ai-body">no fake bird, just poor situational awareness on my end</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="strip">
+            <div class="strip-score">
+              <div class="strip-ring">
+                <svg width="96" height="96" viewBox="0 0 96 96">
+                  <circle cx="48" cy="48" r="40" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="7"/>
+                  <circle cx="48" cy="48" r="40" fill="none" stroke="#ff3b30" stroke-width="7"
+                    stroke-dasharray="251" stroke-dashoffset="190" stroke-linecap="round"/>
+                </svg>
+                <div class="v">
+                  <div class="n">24</div>
+                  <div class="c">score</div>
+                </div>
+              </div>
+              <div class="strip-msg">
+                <div class="t">You're a <span class="em">bad texter.</span></div>
+                <div class="s">9 people waiting. Oldest: 6 days.</div>
+              </div>
+            </div>
+            <div></div>
+            <div class="strip-stats">
+              <div class="st-cell"><div class="st-val">38<span style="font-size:14px;color:var(--ink-3)">%</span></div><div class="st-lab">Reply rate</div></div>
+              <div class="st-cell"><div class="st-val orange">2.1d</div><div class="st-lab">Avg wait</div></div>
+              <div class="st-cell"><div class="st-val red">9</div><div class="st-lab">Hanging</div></div>
+            </div>
+          </div>
+
+          <div class="foot">
+            <span>© 2026 Reply or Die</span>
+            <span>Privacy · Terms · Support</span>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
