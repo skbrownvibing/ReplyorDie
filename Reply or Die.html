@@ -1316,6 +1316,7 @@ const STATE = /*EDITMODE-BEGIN*/{
 let currentScreen = 'landing';
 let currentFilter = 'all';
 let selectedContact = CONTACTS[0];
+let dismissed = new Set();
 
 // ───────────── HELPERS ─────────────
 function urg(h) { if(h<2) return 'cool'; if(h<48) return 'warm'; return 'hot'; }
@@ -1411,10 +1412,11 @@ function applyAccent() {
 
 // ───────────── INBOX RENDER ─────────────
 function filteredContacts() {
-  if (currentFilter === 'urgent') return CONTACTS.filter(c => c.waitH >= 72);
-  if (currentFilter === 'today') return CONTACTS.filter(c => c.waitH < 24);
+  let list = CONTACTS.filter(c => !dismissed.has(c.id));
+  if (currentFilter === 'urgent') return list.filter(c => c.waitH >= 72);
+  if (currentFilter === 'today') return list.filter(c => c.waitH < 24);
   if (currentFilter === 'group') return [];
-  return CONTACTS;
+  return list;
 }
 
 function renderMsgList() {
@@ -1479,7 +1481,7 @@ function renderThread() {
       </div>
     </div>
     <div class="thread-foot">
-      <button class="dismiss-btn">Dismiss</button>
+      <button class="dismiss-btn" onclick="dismissContact()">Dismiss</button>
       <button class="send-btn" onclick="copyAndOpenImessage()">Copy &amp; open iMessage →</button>
     </div>
   `;
@@ -1497,18 +1499,45 @@ function copyAndOpenImessage() {
   }
 }
 
-function regenAi() {
+function dismissContact() {
+  if (!selectedContact) return;
+  dismissed.add(selectedContact.id);
+  selectedContact = null;
+  renderMsgList();
+  renderThread();
+}
+
+async function regenAi() {
   const body = document.getElementById('aiBody');
-  if (!body) return;
+  if (!body || !selectedContact) return;
+
+  const msgs = selectedContact.msgs || [];
+  const context = msgs
+    .filter(m => m.t && m.t.trim())
+    .map(m => ({ speaker: m.me ? 'Me' : 'Them', text: m.t.trim() }));
+
+  if (!context.length) return;
+  const latest = context[context.length - 1];
+  if (latest.speaker !== 'Them') return;
+
   body.innerHTML = '<span class="cursor"></span>';
-  setTimeout(() => {
-    const alts = [
-      'cannot commit. ask me again tomorrow',
-      'noted. counter-proposal: tacos, 7pm, no drama',
-      selectedContact.ai,
-    ];
-    body.textContent = alts[Math.floor(Math.random()*alts.length)];
-  }, 700);
+
+  const conversation = context.map(m => `${m.speaker}: ${m.text}`).join('\n');
+  const prompt = `Write exactly one short text reply to the latest inbound message.\n\nConstraints:\n- write it like a normal text message\n- respond directly to the latest messages\n- avoid overly polished or formal phrasing\n- do not use em dashes\n- be witty and funny\n\nLatest inbound message:\n${latest.text}\n\nRecent text context:\n${conversation}`;
+
+  try {
+    const response = await fetch('/api/ai-suggest-reply', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt, model: 'gpt-4.1-mini' })
+    });
+    if (!response.ok) throw new Error('API error');
+    const data = await response.json();
+    const reply = (data?.reply || '').trim();
+    body.textContent = reply || selectedContact.ai;
+  } catch (_) {
+    body.textContent = selectedContact.ai;
+  }
 }
 
 
