@@ -2,6 +2,11 @@
 
 ## Current development cycle
 
+### 2026-06-08 — Documented Terminal one-liner for first-time export (no download needed)
+- Added a "Run the export (new users)" section to `docs/README.md` with a copy-paste Terminal command that pipes `export.command` from GitHub straight into bash.
+- Avoids the macOS "access privileges" and "unidentified developer" errors new users hit when double-clicking a downloaded `.command` file, since nothing is saved to disk.
+- Documented the one-time Full Disk Access step for Terminal and flagged that the optional auto-refresh runner still needs the full project folder.
+
 ### 2026-04-17 — Top hero compacted vertically to surface Action needed sooner
 - Reduced top hero vertical footprint by tightening score-section padding, internal gaps, and score-history spacing.
 - Slightly reduced score ring size and headline/card sizing to keep hierarchy while bringing the next section higher on screen.
