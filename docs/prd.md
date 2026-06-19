@@ -34,7 +34,10 @@ Exactly one other participant and no group metadata.
 A conversation is waiting on the user when it is a 1:1 conversation, the latest normalized event was sent by the other person, it is not excluded, and it is not dismissed. Filtering may be used for scoring logic but must not override the latest event.
 
 ### Excluded conversations  
-Excluded from action list and scoring if it is a group chat, classified as spam, classified as Automated, or contains no normalized events outside spam/Automated classification. Exclusion does not affect chronological event data.
+Excluded from action list and scoring if it is classified as spam, classified as Automated, or contains no normalized events outside spam/Automated classification. Exclusion does not affect chronological event data.
+
+### Group chats  
+Group chats are always excluded from scoring and score history. Small group chats — fewer than 5 total participants (counting the user) — are surfaced in the action list when waiting on the user so small threads aren't missed; they are tagged as groups in the UI. Larger group chats, and exports without a participant count, remain hidden. Participant count is reported by the exporter as `participant_count`.
 
 ### Automated classification  
 Automated includes delivery updates, rideshare notifications, appointment flows, reservations, verification messages, and other transactional system messages. These are excluded even if they request replies. Human logistics messages are not excluded. Classification is heuristic and user-overridable.
@@ -92,7 +95,7 @@ Multiple numbers per contact, reactions/attachments/non-standard events, missing
 - Suggested reply + Copy  
 - Easier refresh (no manual export)  
 - Pagination (10 threads at a time)  
-- Group chat inclusion  
+- Group chat inclusion (larger groups; small groups now surfaced)  
 - Waiting on others  
 - Work vs personal inbox  
 - Needs Action / Other polish  

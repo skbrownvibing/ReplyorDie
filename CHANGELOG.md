@@ -2,6 +2,13 @@
 
 ## Current development cycle
 
+### 2026-06-19 — Small group chats surfaced in Action needed (still excluded from score)
+- Exporter now records `participant_count` (everyone in the chat, including you) for every conversation.
+- Group chats with fewer than 5 total participants now appear in **Action needed** when they're waiting on your reply, so small group threads are no longer invisible.
+- Small group chats are tagged with a small **Group · N** badge to make clear they're a group and don't count toward the score.
+- Scoring is unchanged: all group chats (small or large) remain excluded from the responsiveness score and score history.
+- Larger group chats (5+ participants) and exports without `participant_count` keep the previous behavior and stay hidden.
+
 ### 2026-04-17 — Top hero compacted vertically to surface Action needed sooner
 - Reduced top hero vertical footprint by tightening score-section padding, internal gaps, and score-history spacing.
 - Slightly reduced score ring size and headline/card sizing to keep hierarchy while bringing the next section higher on screen.
