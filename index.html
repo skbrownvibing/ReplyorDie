@@ -349,6 +349,7 @@ body[data-theme="dark"] #app {
 }
 .action-body { flex:1;min-width:0; }
 .action-name { font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px; }
+.group-tag { display:inline-block;margin-left:6px;padding:1px 6px;border-radius:8px;background:var(--border);color:var(--text3);font-size:10px;font-weight:600;vertical-align:middle; }
 .action-preview { font-size:14px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
 .action-preview .preview-label { font-weight:600;color:var(--text3);font-size:11px; }
 .action-preview-mine { font-size:12px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px; }
@@ -1469,10 +1470,24 @@ function reconcileDismissedState(){
 }
 
 // ── Core filters ─────────────────────────────────────────────────────────────
+// "Total participants" counts you plus everyone else in the chat.
+// Small groups (fewer than 5 people total) are surfaced so you can see which
+// ones are still waiting on a reply. They never count toward the score.
+const SMALL_GROUP_MAX_PARTICIPANTS=5;
+function participantCount(c){
+  const n=Number(c&&c.participant_count);
+  return Number.isFinite(n)&&n>0?n:null;
+}
+function isSmallGroup(c){
+  if(!c||!c.is_group)return false;
+  const n=participantCount(c);
+  // Missing count (older exports) stays excluded, matching prior behavior.
+  return n!==null&&n<SMALL_GROUP_MAX_PARTICIPANTS;
+}
 function needsResponse(c){
   const cat=getCategory(c);
   if(cat==='spam'||cat==='delivery')return false;
-  if(c.is_group)return false;
+  if(c.is_group&&!isSmallGroup(c))return false;
   if(c.i_replied_last)return false;
   if(isDismissed(c))return false;
   return true;
@@ -1993,7 +2008,7 @@ function renderActions(){
       <div class="action-item-top">
         <div class="action-avatar">${esc(initial(c))}</div>
         <div class="action-body">
-          <div class="action-name">${esc(name)}</div>
+          <div class="action-name">${esc(name)}${groupTag(c)}</div>
           ${previewHtml}
         </div>
         <div class="action-right">
@@ -2012,6 +2027,15 @@ function renderActions(){
       </div>
     </div>`;
   }).join('');
+}
+
+// Small "Group · N" badge so it's clear why a group chat is in the list and
+// that it isn't part of the score.
+function groupTag(c){
+  if(!c||!c.is_group)return'';
+  const n=participantCount(c);
+  const label=n!==null?`Group · ${n}`:'Group';
+  return `<span class="group-tag" title="Group chats don't count toward your score">${esc(label)}</span>`;
 }
 
 function otherTexts(){
