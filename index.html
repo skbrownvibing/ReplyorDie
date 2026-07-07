@@ -1481,8 +1481,10 @@ function participantCount(c){
 function isSmallGroup(c){
   if(!c||!c.is_group)return false;
   const n=participantCount(c);
-  // Missing count (older exports) stays excluded, matching prior behavior.
-  return n!==null&&n<SMALL_GROUP_MAX_PARTICIPANTS;
+  // Older exports don't record the count — show the group anyway so nothing is
+  // hidden. When the count IS present, only surface groups under the threshold.
+  if(n===null)return true;
+  return n<SMALL_GROUP_MAX_PARTICIPANTS;
 }
 function needsResponse(c){
   const cat=getCategory(c);
